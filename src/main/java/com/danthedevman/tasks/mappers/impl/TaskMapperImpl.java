@@ -3,7 +3,9 @@ package com.danthedevman.tasks.mappers.impl;
 import com.danthedevman.tasks.domain.dto.TaskDto;
 import com.danthedevman.tasks.domain.entities.Task;
 import com.danthedevman.tasks.mappers.TaskMapper;
+import org.springframework.stereotype.Component;
 
+@Component
 public class TaskMapperImpl implements TaskMapper {
     @Override
     public Task fromDto(TaskDto taskDto) {
