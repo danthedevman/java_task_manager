@@ -1,6 +1,7 @@
 package com.danthedevman.tasks.mappers.impl;
 
 import com.danthedevman.tasks.domain.dto.TaskListDto;
+import com.danthedevman.tasks.domain.dto.UpdateTaskListDto;
 import com.danthedevman.tasks.domain.entities.Task;
 import com.danthedevman.tasks.domain.entities.TaskList;
 import com.danthedevman.tasks.domain.entities.TaskStatus;
@@ -42,6 +43,12 @@ public class TaskListMapperImpl implements TaskListMapper {
                 calculateTaskListProgress(taskList.getTasks()),
                 Optional.ofNullable(taskList.getTasks()).map(tasks -> tasks.stream().map(taskMapper::toDto).toList()).orElse(null)
         );
+    }
+
+    @Override
+    public void updateEntityFromDto(UpdateTaskListDto dto, TaskList taskList) {
+        taskList.setTitle(dto.title());
+        taskList.setDescription(dto.description());
     }
 
     private Double calculateTaskListProgress(List<Task> tasks){

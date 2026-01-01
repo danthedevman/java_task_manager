@@ -1,6 +1,7 @@
 package com.danthedevman.tasks.controllers;
 
 import com.danthedevman.tasks.domain.dto.TaskListDto;
+import com.danthedevman.tasks.domain.dto.UpdateTaskListDto;
 import com.danthedevman.tasks.domain.entities.TaskList;
 import com.danthedevman.tasks.mappers.TaskListMapper;
 import com.danthedevman.tasks.services.TaskListService;
@@ -41,15 +42,10 @@ public class TaskListController {
     @PutMapping(path = "/{task_list_id}")
     public TaskListDto updateTaskList(
             @PathVariable("task_list_id") UUID taskListId,
-            @RequestBody TaskListDto taskListDto
+            @RequestBody UpdateTaskListDto updateTaskListDto
     ){
-        TaskList updatedTaskList = taskListService.updateTaskList(
-                taskListId,
-                taskListMapper.fromDto(taskListDto)
-        );
-
-        return taskListMapper.toDto(updatedTaskList);
-
+        TaskList updated = taskListService.updateTaskList(taskListId, updateTaskListDto);
+        return taskListMapper.toDto(updated);
     }
 
     @DeleteMapping(path = "/{task_list_id}")

@@ -11,4 +11,5 @@ public record TaskListDto(
         Double progress,
         List<TaskDto> tasks
 ) {
+
 }

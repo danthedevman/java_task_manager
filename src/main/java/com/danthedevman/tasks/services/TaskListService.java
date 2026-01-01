@@ -1,5 +1,6 @@
 package com.danthedevman.tasks.services;
 
+import com.danthedevman.tasks.domain.dto.UpdateTaskListDto;
 import com.danthedevman.tasks.domain.entities.TaskList;
 
 import java.util.List;
@@ -10,6 +11,7 @@ public interface TaskListService {
     List<TaskList> listTaskLists();
     TaskList createTaskList(TaskList taskList);
     Optional<TaskList> getTaskList(UUID id);
-    TaskList updateTaskList(UUID taskListId, TaskList taskList);
+    TaskList updateTaskList(UUID taskListId, UpdateTaskListDto dto);
+
     void deleteTaskList(UUID taskListId);
 }
