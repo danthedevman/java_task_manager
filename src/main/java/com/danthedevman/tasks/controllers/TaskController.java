@@ -1,14 +1,13 @@
 package com.danthedevman.tasks.controllers;
 
 import com.danthedevman.tasks.domain.dto.TaskDto;
+import com.danthedevman.tasks.domain.entities.Task;
 import com.danthedevman.tasks.mappers.TaskMapper;
 import com.danthedevman.tasks.services.TaskService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -26,5 +25,20 @@ public class TaskController {
     @GetMapping
     public List<TaskDto> listTasks(@PathVariable("task_list_id") UUID taskListId){
         return taskService.listTasks(taskListId).stream().map(taskMapper::toDto).toList();
+    }
+
+    @PostMapping
+    public TaskDto createTask(@PathVariable("task_list_id") UUID taskListId,@RequestBody TaskDto taskDto){
+        Task createdTask = taskService.createTask(
+                taskListId,
+                taskMapper.fromDto(taskDto)
+        );
+
+        return taskMapper.toDto(createdTask);
+    }
+
+    @GetMapping(path = "/{task_id}")
+    public Optional<TaskDto> getTask(@PathVariable("task_list_id") UUID taskListId, @PathVariable("task_id") UUID taskId){
+        return taskService.getTask(taskListId,taskId).map(taskMapper::toDto);
     }
 }

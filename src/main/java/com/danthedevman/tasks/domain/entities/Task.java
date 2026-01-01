@@ -55,6 +55,9 @@ public class Task {
         this.updated = updated;
     }
 
+    public Task(Object o, String title, String description, LocalDateTime dueDate, TaskStatus taskStatus, TaskPriority taskPriority, LocalDateTime now, LocalDateTime now1) {
+    }
+
     public String getDescription() {
         return description;
     }
